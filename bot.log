@@ -1,0 +1,388 @@
+2025-09-05 12:56:49,907 - auth.google_auth - INFO - Credentials saved
+2025-09-05 12:56:49,907 - auth.google_auth - INFO - Created credentials from environment variables
+2025-09-05 12:56:49,907 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 12:56:49,908 - core.bot - INFO - Initialized calendar service
+2025-09-05 12:56:49,908 - services.base_service - INFO - Initialized GmailService
+2025-09-05 12:56:49,908 - core.bot - INFO - Initialized gmail service
+2025-09-05 12:56:49,908 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 12:56:49,908 - core.bot - INFO - Initialized contacts service
+2025-09-05 12:56:49,908 - services.base_service - INFO - Initialized DriveService
+2025-09-05 12:56:49,908 - core.bot - INFO - Initialized drive service
+2025-09-05 12:56:49,910 - services.base_service - INFO - Initialized TasksService
+2025-09-05 12:56:49,910 - core.bot - INFO - Initialized tasks service
+2025-09-05 12:56:49,910 - core.bot - INFO - Bot initialized successfully
+2025-09-05 12:56:49,911 - core.bot - INFO - Starting bot polling...
+2025-09-05 12:56:49,911 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 12:56:54,213 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 12:57:09,320 - aiogram.event - INFO - Update id=614096810 is handled. Duration 1902 ms by bot id=8282897069
+2025-09-05 12:57:17,085 - aiogram.event - INFO - Update id=614096811 is handled. Duration 1218 ms by bot id=8282897069
+2025-09-05 12:57:36,802 - aiogram.event - INFO - Update id=614096812 is handled. Duration 1108 ms by bot id=8282897069
+2025-09-05 12:57:59,230 - aiogram.event - INFO - Update id=614096813 is handled. Duration 3506 ms by bot id=8282897069
+2025-09-05 12:58:20,650 - aiogram.event - INFO - Update id=614096814 is handled. Duration 1552 ms by bot id=8282897069
+2025-09-05 12:58:52,569 - aiogram.event - INFO - Update id=614096815 is handled. Duration 959 ms by bot id=8282897069
+2025-09-05 13:21:38,310 - aiogram.event - INFO - Update id=614096816 is handled. Duration 1314 ms by bot id=8282897069
+2025-09-05 13:22:01,306 - aiogram.event - INFO - Update id=614096817 is handled. Duration 2188 ms by bot id=8282897069
+2025-09-05 13:22:49,201 - aiogram.event - INFO - Update id=614096818 is handled. Duration 1889 ms by bot id=8282897069
+2025-09-05 13:23:09,754 - aiogram.event - INFO - Update id=614096819 is handled. Duration 1068 ms by bot id=8282897069
+2025-09-05 13:23:31,427 - aiogram.event - INFO - Update id=614096820 is handled. Duration 1115 ms by bot id=8282897069
+2025-09-05 13:23:40,999 - aiogram.event - INFO - Update id=614096821 is handled. Duration 2337 ms by bot id=8282897069
+2025-09-05 13:23:56,528 - aiogram.event - INFO - Update id=614096822 is handled. Duration 3537 ms by bot id=8282897069
+2025-09-05 13:24:46,616 - aiogram.event - INFO - Update id=614096823 is handled. Duration 1474 ms by bot id=8282897069
+2025-09-05 13:24:59,405 - aiogram.event - INFO - Update id=614096824 is handled. Duration 1300 ms by bot id=8282897069
+2025-09-05 13:25:16,147 - aiogram.event - INFO - Update id=614096825 is handled. Duration 1091 ms by bot id=8282897069
+2025-09-05 13:34:27,628 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 13:34:27,630 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 13:34:27,631 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 13:34:27,893 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 13:35:17,776 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 13:35:17,790 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 13:35:17,791 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 13:35:17,791 - core.bot - INFO - Initialized calendar service
+2025-09-05 13:35:17,791 - services.base_service - INFO - Initialized GmailService
+2025-09-05 13:35:17,791 - core.bot - INFO - Initialized gmail service
+2025-09-05 13:35:17,792 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 13:35:17,792 - core.bot - INFO - Initialized contacts service
+2025-09-05 13:35:17,792 - services.base_service - INFO - Initialized DriveService
+2025-09-05 13:35:17,792 - core.bot - INFO - Initialized drive service
+2025-09-05 13:35:17,792 - services.base_service - INFO - Initialized TasksService
+2025-09-05 13:35:17,793 - core.bot - INFO - Initialized tasks service
+2025-09-05 13:35:17,794 - core.bot - INFO - Bot initialized successfully
+2025-09-05 13:35:17,794 - core.bot - INFO - Starting bot polling...
+2025-09-05 13:35:17,794 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 13:35:19,280 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 13:36:02,315 - aiogram.event - INFO - Update id=614096826 is handled. Duration 4478 ms by bot id=8282897069
+2025-09-05 13:36:15,644 - aiogram.event - INFO - Update id=614096827 is handled. Duration 1556 ms by bot id=8282897069
+2025-09-05 13:37:03,581 - auth.google_auth - ERROR - Failed to refresh token: ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+2025-09-05 13:37:03,584 - aiogram.event - INFO - Update id=614096828 is handled. Duration 4557 ms by bot id=8282897069
+2025-09-05 13:59:16,988 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 13:59:16,991 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 13:59:16,991 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 13:59:17,246 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:00:36,927 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 14:00:36,933 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 14:00:36,933 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 14:00:36,933 - core.bot - INFO - Initialized calendar service
+2025-09-05 14:00:36,933 - services.base_service - INFO - Initialized GmailService
+2025-09-05 14:00:36,933 - core.bot - INFO - Initialized gmail service
+2025-09-05 14:00:36,934 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 14:00:36,934 - core.bot - INFO - Initialized contacts service
+2025-09-05 14:00:36,934 - services.base_service - INFO - Initialized DriveService
+2025-09-05 14:00:36,935 - core.bot - INFO - Initialized drive service
+2025-09-05 14:00:36,935 - services.base_service - INFO - Initialized TasksService
+2025-09-05 14:00:36,935 - core.bot - INFO - Initialized tasks service
+2025-09-05 14:00:36,936 - core.bot - INFO - Bot initialized successfully
+2025-09-05 14:00:36,936 - core.bot - INFO - Starting bot polling...
+2025-09-05 14:00:36,936 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 14:00:37,531 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:00:53,587 - services.base_service - ERROR - API call failed: 403 - {
+  "error": {
+    "code": 403,
+    "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.",
+    "errors": [
+      {
+        "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.",
+        "domain": "usageLimits",
+        "reason": "accessNotConfigured",
+        "extendedHelp": "https://console.developers.google.com"
+      }
+    ],
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "SERVICE_DISABLED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "gmail.googleapis.com",
+          "consumer": "projects/135091255321",
+          "activationUrl": "https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321",
+          "serviceTitle": "Gmail API",
+          "containerInfo": "135091255321"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Google developers console API activation",
+            "url": "https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+2025-09-05 14:00:53,790 - aiogram.event - INFO - Update id=614096829 is handled. Duration 3070 ms by bot id=8282897069
+2025-09-05 14:01:09,307 - aiogram.event - INFO - Update id=614096830 is handled. Duration 1267 ms by bot id=8282897069
+2025-09-05 14:01:29,792 - aiogram.event - INFO - Update id=614096831 is handled. Duration 1734 ms by bot id=8282897069
+2025-09-05 14:01:35,205 - aiogram.event - INFO - Update id=614096832 is handled. Duration 1215 ms by bot id=8282897069
+2025-09-05 14:02:01,551 - aiogram.event - INFO - Update id=614096833 is handled. Duration 1824 ms by bot id=8282897069
+2025-09-05 14:02:06,068 - services.base_service - ERROR - API call failed: 403 - {
+  "error": {
+    "code": 403,
+    "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.",
+    "errors": [
+      {
+        "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.",
+        "domain": "usageLimits",
+        "reason": "accessNotConfigured",
+        "extendedHelp": "https://console.developers.google.com"
+      }
+    ],
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "SERVICE_DISABLED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "activationUrl": "https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321",
+          "service": "gmail.googleapis.com",
+          "consumer": "projects/135091255321",
+          "serviceTitle": "Gmail API",
+          "containerInfo": "135091255321"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "Gmail API has not been used in project 135091255321 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Google developers console API activation",
+            "url": "https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=135091255321"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+2025-09-05 14:02:06,261 - aiogram.event - INFO - Update id=614096834 is handled. Duration 690 ms by bot id=8282897069
+2025-09-05 14:05:56,686 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 14:05:56,689 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 14:05:56,690 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 14:05:56,950 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:06:01,759 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 14:06:01,775 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 14:06:01,775 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 14:06:01,776 - core.bot - INFO - Initialized calendar service
+2025-09-05 14:06:01,776 - services.base_service - INFO - Initialized GmailService
+2025-09-05 14:06:01,776 - core.bot - INFO - Initialized gmail service
+2025-09-05 14:06:01,776 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 14:06:01,776 - core.bot - INFO - Initialized contacts service
+2025-09-05 14:06:01,776 - services.base_service - INFO - Initialized DriveService
+2025-09-05 14:06:01,776 - core.bot - INFO - Initialized drive service
+2025-09-05 14:06:01,776 - services.base_service - INFO - Initialized TasksService
+2025-09-05 14:06:01,777 - core.bot - INFO - Initialized tasks service
+2025-09-05 14:06:01,779 - core.bot - INFO - Bot initialized successfully
+2025-09-05 14:06:01,779 - core.bot - INFO - Starting bot polling...
+2025-09-05 14:06:01,779 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 14:06:02,614 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:06:17,565 - aiogram.event - INFO - Update id=614096835 is handled. Duration 4201 ms by bot id=8282897069
+2025-09-05 14:06:22,120 - aiogram.event - INFO - Update id=614096836 is handled. Duration 2441 ms by bot id=8282897069
+2025-09-05 14:07:01,774 - aiogram.event - INFO - Update id=614096837 is handled. Duration 2890 ms by bot id=8282897069
+2025-09-05 14:07:28,863 - aiogram.event - INFO - Update id=614096838 is handled. Duration 5269 ms by bot id=8282897069
+2025-09-05 14:08:16,265 - aiogram.event - INFO - Update id=614096839 is handled. Duration 4503 ms by bot id=8282897069
+2025-09-05 14:09:18,218 - aiogram.event - INFO - Update id=614096840 is handled. Duration 15889 ms by bot id=8282897069
+2025-09-05 14:09:41,520 - aiogram.event - INFO - Update id=614096841 is handled. Duration 11367 ms by bot id=8282897069
+2025-09-05 14:09:48,337 - aiogram.event - INFO - Update id=614096842 is handled. Duration 4718 ms by bot id=8282897069
+2025-09-05 14:09:59,659 - aiogram.event - INFO - Update id=614096843 is handled. Duration 5916 ms by bot id=8282897069
+2025-09-05 14:10:58,480 - aiogram.event - INFO - Update id=614096844 is handled. Duration 13277 ms by bot id=8282897069
+2025-09-05 14:11:22,481 - aiogram.event - INFO - Update id=614096845 is handled. Duration 12034 ms by bot id=8282897069
+2025-09-05 14:24:02,422 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 14:24:02,424 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 14:24:02,424 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 14:24:02,679 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:24:09,330 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 14:24:09,337 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 14:24:09,338 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 14:24:09,338 - core.bot - INFO - Initialized calendar service
+2025-09-05 14:24:09,338 - services.base_service - INFO - Initialized GmailService
+2025-09-05 14:24:09,338 - core.bot - INFO - Initialized gmail service
+2025-09-05 14:24:09,338 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 14:24:09,339 - core.bot - INFO - Initialized contacts service
+2025-09-05 14:24:09,339 - services.base_service - INFO - Initialized DriveService
+2025-09-05 14:24:09,339 - core.bot - INFO - Initialized drive service
+2025-09-05 14:24:09,339 - services.base_service - INFO - Initialized TasksService
+2025-09-05 14:24:09,340 - core.bot - INFO - Initialized tasks service
+2025-09-05 14:24:09,340 - core.bot - INFO - Bot initialized successfully
+2025-09-05 14:24:09,341 - core.bot - INFO - Starting bot polling...
+2025-09-05 14:24:09,341 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 14:24:10,443 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 14:24:27,840 - aiogram.event - INFO - Update id=614096846 is handled. Duration 7047 ms by bot id=8282897069
+2025-09-05 14:25:31,068 - aiogram.event - INFO - Update id=614096848 is handled. Duration 15161 ms by bot id=8282897069
+2025-09-05 14:25:33,907 - aiogram.event - INFO - Update id=614096847 is handled. Duration 52085 ms by bot id=8282897069
+2025-09-05 14:25:43,275 - aiogram.event - INFO - Update id=614096849 is handled. Duration 1856 ms by bot id=8282897069
+2025-09-05 14:26:13,732 - aiogram.event - INFO - Update id=614096850 is handled. Duration 4746 ms by bot id=8282897069
+2025-09-05 14:26:47,925 - aiogram.event - INFO - Update id=614096851 is handled. Duration 27460 ms by bot id=8282897069
+2025-09-05 14:26:59,694 - aiogram.event - INFO - Update id=614096852 is handled. Duration 6418 ms by bot id=8282897069
+2025-09-05 14:27:35,348 - aiogram.event - INFO - Update id=614096853 is handled. Duration 27246 ms by bot id=8282897069
+2025-09-05 16:53:01,404 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-09-05 16:53:01,404 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 16:53:13,101 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8282897069)
+2025-09-05 18:12:31,225 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2025-09-05 18:12:31,226 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 18:12:42,651 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 8282897069)
+2025-09-05 18:18:54,260 - auth.google_auth - INFO - Credentials saved
+2025-09-05 18:18:54,262 - auth.google_auth - INFO - Token refreshed successfully
+2025-09-05 18:18:55,045 - aiogram.event - INFO - Update id=614096854 is handled. Duration 6568 ms by bot id=8282897069
+2025-09-05 18:28:45,423 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 18:28:45,424 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 18:28:45,425 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 18:28:45,678 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 18:28:49,838 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 18:28:49,844 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 18:28:49,844 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 18:28:49,845 - core.bot - INFO - Initialized calendar service
+2025-09-05 18:28:49,845 - services.base_service - INFO - Initialized GmailService
+2025-09-05 18:28:49,845 - core.bot - INFO - Initialized gmail service
+2025-09-05 18:28:49,846 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 18:28:49,846 - core.bot - INFO - Initialized contacts service
+2025-09-05 18:28:49,846 - services.base_service - INFO - Initialized DriveService
+2025-09-05 18:28:49,846 - core.bot - INFO - Initialized drive service
+2025-09-05 18:28:49,847 - services.base_service - INFO - Initialized TasksService
+2025-09-05 18:28:49,847 - core.bot - INFO - Initialized tasks service
+2025-09-05 18:28:49,847 - core.bot - INFO - Bot initialized successfully
+2025-09-05 18:28:49,848 - core.bot - INFO - Starting bot polling...
+2025-09-05 18:28:49,848 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 18:28:50,209 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 18:29:03,635 - aiogram.event - INFO - Update id=614096855 is handled. Duration 2931 ms by bot id=8282897069
+2025-09-05 18:29:16,849 - aiogram.event - INFO - Update id=614096856 is handled. Duration 2724 ms by bot id=8282897069
+2025-09-05 18:29:49,019 - aiogram.event - INFO - Update id=614096857 is handled. Duration 2557 ms by bot id=8282897069
+2025-09-05 18:29:56,109 - aiogram.event - INFO - Update id=614096858 is handled. Duration 2405 ms by bot id=8282897069
+2025-09-05 18:30:02,851 - aiogram.event - INFO - Update id=614096859 is handled. Duration 2458 ms by bot id=8282897069
+2025-09-05 18:31:21,302 - aiogram.event - INFO - Update id=614096860 is handled. Duration 5536 ms by bot id=8282897069
+2025-09-05 18:31:43,870 - aiogram.event - INFO - Update id=614096861 is handled. Duration 13882 ms by bot id=8282897069
+2025-09-05 18:49:42,937 - aiogram.event - INFO - Update id=614096862 is handled. Duration 1134 ms by bot id=8282897069
+2025-09-05 18:49:56,506 - services.calendar.calendar_service - ERROR - Error viewing events: slice(None, 20, None)
+2025-09-05 18:49:56,699 - aiogram.event - INFO - Update id=614096863 is handled. Duration 2567 ms by bot id=8282897069
+2025-09-05 18:50:15,870 - services.calendar.calendar_service - ERROR - Error viewing events: slice(None, 20, None)
+2025-09-05 18:50:15,993 - aiogram.event - INFO - Update id=614096864 is handled. Duration 2146 ms by bot id=8282897069
+2025-09-05 18:50:26,615 - services.calendar.calendar_service - ERROR - Error viewing events: slice(None, 20, None)
+2025-09-05 18:50:26,801 - aiogram.event - INFO - Update id=614096865 is handled. Duration 1761 ms by bot id=8282897069
+2025-09-05 18:56:26,705 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 18:56:26,707 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 18:56:26,707 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 18:56:26,971 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 18:56:30,401 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 18:56:30,402 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 18:56:30,402 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 18:56:30,402 - core.bot - INFO - Initialized calendar service
+2025-09-05 18:56:30,402 - services.base_service - INFO - Initialized GmailService
+2025-09-05 18:56:30,403 - core.bot - INFO - Initialized gmail service
+2025-09-05 18:56:30,403 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 18:56:30,403 - core.bot - INFO - Initialized contacts service
+2025-09-05 18:56:30,403 - services.base_service - INFO - Initialized DriveService
+2025-09-05 18:56:30,403 - core.bot - INFO - Initialized drive service
+2025-09-05 18:56:30,403 - services.base_service - INFO - Initialized TasksService
+2025-09-05 18:56:30,403 - core.bot - INFO - Initialized tasks service
+2025-09-05 18:56:30,404 - core.bot - INFO - Bot initialized successfully
+2025-09-05 18:56:30,404 - core.bot - INFO - Starting bot polling...
+2025-09-05 18:56:30,404 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 18:56:30,738 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 18:56:43,316 - aiogram.event - INFO - Update id=614096866 is handled. Duration 2302 ms by bot id=8282897069
+2025-09-05 18:57:32,044 - aiogram.event - INFO - Update id=614096867 is handled. Duration 36406 ms by bot id=8282897069
+2025-09-05 18:58:08,927 - aiogram.event - INFO - Update id=614096868 is handled. Duration 23257 ms by bot id=8282897069
+2025-09-05 18:58:25,278 - aiogram.event - INFO - Update id=614096869 is handled. Duration 3211 ms by bot id=8282897069
+2025-09-05 18:59:11,547 - aiogram.event - INFO - Update id=614096870 is handled. Duration 5711 ms by bot id=8282897069
+2025-09-05 19:10:23,369 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 19:10:23,371 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 19:10:23,372 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 19:10:23,635 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:10:26,495 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 19:10:26,495 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 19:10:26,495 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 19:10:26,496 - core.bot - INFO - Initialized calendar service
+2025-09-05 19:10:26,496 - services.base_service - INFO - Initialized GmailService
+2025-09-05 19:10:26,496 - core.bot - INFO - Initialized gmail service
+2025-09-05 19:10:26,496 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 19:10:26,496 - core.bot - INFO - Initialized contacts service
+2025-09-05 19:10:26,496 - services.base_service - INFO - Initialized DriveService
+2025-09-05 19:10:26,497 - core.bot - INFO - Initialized drive service
+2025-09-05 19:10:26,497 - services.base_service - INFO - Initialized TasksService
+2025-09-05 19:10:26,497 - core.bot - INFO - Initialized tasks service
+2025-09-05 19:10:26,498 - core.bot - INFO - Bot initialized successfully
+2025-09-05 19:10:26,498 - core.bot - INFO - Starting bot polling...
+2025-09-05 19:10:26,499 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 19:10:27,663 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:10:45,074 - aiogram.event - INFO - Update id=614096871 is handled. Duration 4361 ms by bot id=8282897069
+2025-09-05 19:10:57,580 - aiogram.event - INFO - Update id=614096872 is handled. Duration 3822 ms by bot id=8282897069
+2025-09-05 19:11:23,273 - aiogram.event - INFO - Update id=614096873 is handled. Duration 5281 ms by bot id=8282897069
+2025-09-05 19:11:44,723 - aiogram.event - INFO - Update id=614096874 is handled. Duration 4347 ms by bot id=8282897069
+2025-09-05 19:17:46,722 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 19:17:46,724 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 19:17:46,725 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 19:17:46,983 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:17:57,822 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 19:17:57,822 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 19:17:57,822 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 19:17:57,822 - core.bot - INFO - Initialized calendar service
+2025-09-05 19:17:57,823 - services.base_service - INFO - Initialized GmailService
+2025-09-05 19:17:57,823 - core.bot - INFO - Initialized gmail service
+2025-09-05 19:17:57,823 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 19:17:57,823 - core.bot - INFO - Initialized contacts service
+2025-09-05 19:17:57,823 - services.base_service - INFO - Initialized DriveService
+2025-09-05 19:17:57,823 - core.bot - INFO - Initialized drive service
+2025-09-05 19:17:57,823 - services.base_service - INFO - Initialized TasksService
+2025-09-05 19:17:57,823 - core.bot - INFO - Initialized tasks service
+2025-09-05 19:17:57,824 - core.bot - INFO - Bot initialized successfully
+2025-09-05 19:17:57,824 - core.bot - INFO - Starting bot polling...
+2025-09-05 19:17:57,824 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 19:17:58,451 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:18:13,710 - auth.google_auth - INFO - Credentials saved
+2025-09-05 19:18:13,710 - auth.google_auth - INFO - Token refreshed successfully
+2025-09-05 19:18:14,523 - aiogram.event - INFO - Update id=614096875 is handled. Duration 3492 ms by bot id=8282897069
+2025-09-05 19:18:30,987 - aiogram.event - INFO - Update id=614096876 is handled. Duration 2839 ms by bot id=8282897069
+2025-09-05 19:20:43,552 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 19:20:43,553 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 19:20:43,553 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 19:20:43,817 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:20:47,696 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 19:20:47,697 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 19:20:47,697 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 19:20:47,697 - core.bot - INFO - Initialized calendar service
+2025-09-05 19:20:47,697 - services.base_service - INFO - Initialized GmailService
+2025-09-05 19:20:47,698 - core.bot - INFO - Initialized gmail service
+2025-09-05 19:20:47,699 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 19:20:47,699 - core.bot - INFO - Initialized contacts service
+2025-09-05 19:20:47,699 - services.base_service - INFO - Initialized DriveService
+2025-09-05 19:20:47,699 - core.bot - INFO - Initialized drive service
+2025-09-05 19:20:47,699 - services.base_service - INFO - Initialized TasksService
+2025-09-05 19:20:47,699 - core.bot - INFO - Initialized tasks service
+2025-09-05 19:20:47,700 - core.bot - INFO - Bot initialized successfully
+2025-09-05 19:20:47,700 - core.bot - INFO - Starting bot polling...
+2025-09-05 19:20:47,700 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 19:20:48,522 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:20:58,212 - core.bot - ERROR - Error executing gmail action: 'GmailService' object has no attribute 'handle_draft_email'
+2025-09-05 19:20:58,429 - aiogram.event - INFO - Update id=614096877 is handled. Duration 4016 ms by bot id=8282897069
+2025-09-05 19:22:23,717 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-05 19:22:23,719 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-09-05 19:22:23,719 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8282897069)
+2025-09-05 19:22:23,972 - aiogram.dispatcher - INFO - Polling stopped for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:22:30,447 - auth.google_auth - INFO - Loaded saved Google credentials
+2025-09-05 19:22:30,447 - core.conversation_manager - INFO - Loaded conversations for 1 users
+2025-09-05 19:22:30,448 - services.base_service - INFO - Initialized CalendarService
+2025-09-05 19:22:30,448 - core.bot - INFO - Initialized calendar service
+2025-09-05 19:22:30,448 - services.base_service - INFO - Initialized GmailService
+2025-09-05 19:22:30,448 - core.bot - INFO - Initialized gmail service
+2025-09-05 19:22:30,448 - services.base_service - INFO - Initialized ContactsService
+2025-09-05 19:22:30,449 - core.bot - INFO - Initialized contacts service
+2025-09-05 19:22:30,449 - services.base_service - INFO - Initialized DriveService
+2025-09-05 19:22:30,449 - core.bot - INFO - Initialized drive service
+2025-09-05 19:22:30,449 - services.base_service - INFO - Initialized TasksService
+2025-09-05 19:22:30,449 - core.bot - INFO - Initialized tasks service
+2025-09-05 19:22:30,449 - core.bot - INFO - Bot initialized successfully
+2025-09-05 19:22:30,450 - core.bot - INFO - Starting bot polling...
+2025-09-05 19:22:30,450 - aiogram.dispatcher - INFO - Start polling
+2025-09-05 19:22:31,441 - aiogram.dispatcher - INFO - Run polling for bot @macagentbot id=8282897069 - 'MAC_Test'
+2025-09-05 19:22:45,392 - aiogram.event - INFO - Update id=614096878 is handled. Duration 6660 ms by bot id=8282897069

@@ -1,0 +1,54 @@
+{
+  "829535248": [
+    {
+      "role": "user",
+      "content": "delete this email\n1. New to Lindy? Build 2 AI agents with us live - Sept 9\n   From: The Lindy Team <florent@lindy.ai>\n   Join 500+ for 90 minutes to build 2 working agents in a hands-on workshop. ​ ​ ​ ​ ​ ​ ​ ​ ...",
+      "timestamp": "2025-09-05T19:11:40.662249"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will find that email and delete it for you.",
+      "timestamp": "2025-09-05T19:11:42.958482"
+    },
+    {
+      "role": "user",
+      "content": "delete this email\n1. New to Lindy? Build 2 AI agents with us live - Sept 9\n   From: The Lindy Team <florent@lindy.ai>\n   Join 500+ for 90 minutes to build 2 working agents in a hands-on workshop. ​ ​ ​ ​ ​ ​ ​ ​ ...",
+      "timestamp": "2025-09-05T19:18:11.370399"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will find that email and delete it for you.",
+      "timestamp": "2025-09-05T19:18:12.963092"
+    },
+    {
+      "role": "user",
+      "content": "yes delet it",
+      "timestamp": "2025-09-05T19:18:28.299978"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will find that email and delete it for you.",
+      "timestamp": "2025-09-05T19:18:30.194462"
+    },
+    {
+      "role": "user",
+      "content": "delete this email\n1. New to Lindy? Build 2 AI agents with us live - Sept 9\n   From: The Lindy Team <florent@lindy.ai>\n   Join 500+ for 90 minutes to build 2 working agents in a hands-on workshop. ​ ​ ​ ​ ​ ​ ​ ​ ...",
+      "timestamp": "2025-09-05T19:20:54.992695"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will find and delete that email for you.",
+      "timestamp": "2025-09-05T19:20:58.211593"
+    },
+    {
+      "role": "user",
+      "content": "delete this email\n1. New to Lindy? Build 2 AI agents with us live - Sept 9\n   From: The Lindy Team <florent@lindy.ai>\n   Join 500+ for 90 minutes to build 2 working agents in a hands-on workshop. ​ ​ ​ ​ ​ ​ ​ ​ ...",
+      "timestamp": "2025-09-05T19:22:39.678162"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, I will find and delete that email for you.",
+      "timestamp": "2025-09-05T19:22:42.516382"
+    }
+  ]
+}
