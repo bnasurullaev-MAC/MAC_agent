@@ -1,47 +1,52 @@
-# =====================================
-# FILE: core/gemini_processor.py (FIXED WORKING VERSION)
-# =====================================
-"""Enhanced Gemini AI processor with superior intent recognition"""
+"""
+Enhanced Gemini AI processor with comprehensive calendar integration
+=====================================================================
+Fully integrated with all CalendarService capabilities including advanced
+scheduling, conflict detection, and intelligent command parsing.
+"""
+
 import logging
 import re
 from typing import Dict, List, Any, Tuple, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 import google.generativeai as genai
 from config import Config
 
 logger = logging.getLogger(__name__)
 
+
 class GeminiProcessor:
-    """Advanced Gemini processor with comprehensive understanding"""
+    """Advanced Gemini processor with immediate calendar action execution"""
     
     def __init__(self):
         self.api_key = Config.GEMINI_API_KEY
         if self.api_key:
             genai.configure(api_key=self.api_key)
-            # Use the correct model name
             try:
-                self.model = genai.GenerativeModel('gemini-2.5-flash')
-                logger.info("Gemini 2.5 Flash initialized successfully")
-            except Exception as e:
-                logger.warning(f"Failed to initialize gemini-2.5-flash, trying gemini-pro: {e}")
-                try:
-                    self.model = genai.GenerativeModel('gemini-pro')
-                    logger.info("Gemini Pro initialized successfully")
-                except Exception as e2:
-                    logger.error(f"Failed to initialize any Gemini model: {e2}")
+                # Try different model versions
+                model_names = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-pro']
+                for model_name in model_names:
+                    try:
+                        self.model = genai.GenerativeModel(model_name)
+                        logger.info(f"{model_name} initialized successfully")
+                        break
+                    except Exception as e:
+                        logger.warning(f"Failed to initialize {model_name}: {e}")
+                        continue
+                else:
+                    logger.error("Failed to initialize any Gemini model")
                     self.model = None
+            except Exception as e:
+                logger.error(f"Critical error initializing Gemini: {e}")
+                self.model = None
         else:
             self.model = None
             logger.warning("Gemini API key not configured")
         
         self.timezone = Config.DEFAULT_TIMEZONE
     
-    async def process(self, 
-                     user_message: str, 
-                     user_id: int,
-                     context: str,
-                     available_services: Dict) -> Dict:
-        """Process user message with enhanced understanding"""
+    async def process(self, user_message: str, user_id: int, context: str, available_services: Dict) -> Dict:
+        """Process user message with immediate calendar action execution"""
         
         if not self.model:
             return {
@@ -50,22 +55,28 @@ class GeminiProcessor:
             }
         
         try:
-            # First, try to match direct patterns for faster response
+            # PRIORITY 1: Check for calendar-related keywords first
+            if 'calendar' in available_services:
+                calendar_action = self._check_calendar_intent(user_message)
+                if calendar_action:
+                    logger.info(f"Calendar intent detected: {calendar_action}")
+                    return calendar_action
+            
+            # PRIORITY 2: Try quick pattern matching
             quick_action = self._quick_pattern_match(user_message, available_services)
             if quick_action:
+                logger.info(f"Quick pattern matched: {quick_action}")
                 return quick_action
             
-            # Build comprehensive prompt
+            # PRIORITY 3: Use Gemini only if no patterns matched
             prompt = self._build_enhanced_prompt(user_message, context, available_services)
-            
-            # Generate response
             response = self.model.generate_content(prompt)
             response_text = response.text.strip()
             
-            # Parse response for actions with validation
+            # Parse response for actions
             clean_text, actions = self._parse_and_validate_response(response_text, available_services)
             
-            # Post-process actions for better accuracy
+            # Post-process actions
             actions = self._enhance_actions(actions, user_message)
             
             return {
@@ -75,12 +86,133 @@ class GeminiProcessor:
             
         except Exception as e:
             logger.error(f"Gemini processing error: {e}", exc_info=True)
-            # Fallback to pattern matching
             return self._fallback_processing(user_message, available_services)
     
-    def _quick_pattern_match(self, message: str, services: Dict) -> Optional[Dict]:
-        """Quick pattern matching for common requests"""
+    def _check_calendar_intent(self, message: str) -> Optional[Dict]:
+        """Check for calendar-related intents and return immediate action"""
         message_lower = message.lower()
+        
+        # Direct calendar viewing requests - HIGHEST PRIORITY
+        calendar_view_patterns = [
+            r"what(?:'s| is)(?: on)?(?: my)? (?:for |on )?(?:calendar|schedule|agenda)?\s*(?:for |on )?\s*today",
+            r"what(?:'s| is) (?:on )?(?:my )?calendar",
+            r"what(?:'s| is) (?:on )?today",
+            r"what(?:'s| is) for today",
+            r"(?:show|display|list|view|check)(?: me)?(?: my)? (?:calendar|schedule|events?|agenda)",
+            r"(?:my )?(?:calendar|schedule|events?|agenda)(?: for)?(?: today)?",
+            r"what do i have (?:today|scheduled)",
+            r"today(?:'s)? (?:calendar|schedule|events?|agenda)",
+            r"(?:calendar|schedule) today",
+        ]
+        
+        for pattern in calendar_view_patterns:
+            if re.search(pattern, message_lower):
+                # Determine the range
+                if 'yesterday' in message_lower:
+                    range_val = 'yesterday'
+                elif 'tomorrow' in message_lower:
+                    range_val = 'tomorrow'
+                elif 'week' in message_lower or 'weekly' in message_lower:
+                    range_val = 'week'
+                elif 'month' in message_lower or 'monthly' in message_lower:
+                    range_val = 'month'
+                else:
+                    range_val = 'today'  # Default to today
+                
+                return {
+                    'text': "",  # No text response needed - let the action provide the response
+                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': range_val}}]
+                }
+        
+        # Check for other calendar keywords
+        calendar_keywords = ['schedule', 'meeting', 'appointment', 'event', 'calendar']
+        if any(keyword in message_lower for keyword in calendar_keywords):
+            # Check for creation intent
+            if any(word in message_lower for word in ['create', 'add', 'schedule', 'book', 'set up']):
+                event_info = self._extract_event_info(message_lower)
+                return {
+                    'text': "I'll help you schedule that.",
+                    'actions': [{'service': 'calendar', 'action': 'CREATE_EVENT', 'params': event_info}]
+                }
+            
+            # Check for deletion intent
+            if any(word in message_lower for word in ['cancel', 'delete', 'remove']):
+                params = self._extract_event_reference(message_lower)
+                return {
+                    'text': "I'll cancel that for you.",
+                    'actions': [{'service': 'calendar', 'action': 'DELETE_EVENT', 'params': params}]
+                }
+        
+        return None
+    
+    def _quick_pattern_match(self, message: str, services: Dict) -> Optional[Dict]:
+        """Enhanced quick pattern matching for all services"""
+        message_lower = message.lower()
+        
+        # Calendar patterns - comprehensive matching
+        if 'calendar' in services:
+            # Simple question patterns that should show today's calendar
+            simple_patterns = [
+                r"^\?+$",  # Just question marks
+                r"^what(?:'s| is) (?:on )?(?:my )?calendar\??$",
+                r"^calendar\??$",
+                r"^schedule\??$",
+                r"^today\??$",
+                r"^what(?:'s| is) today\??$",
+                r"^what(?:'s| is) for today\??$",
+            ]
+            
+            for pattern in simple_patterns:
+                if re.match(pattern, message_lower.strip()):
+                    return {
+                        'text': "",
+                        'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'today'}}]
+                    }
+            
+            # Yesterday's events
+            if 'yesterday' in message_lower:
+                return {
+                    'text': "",
+                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'yesterday'}}]
+                }
+            
+            # Tomorrow's events
+            if 'tomorrow' in message_lower:
+                return {
+                    'text': "",
+                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'tomorrow'}}]
+                }
+            
+            # Weekly events
+            if any(phrase in message_lower for phrase in ['this week', 'weekly', 'week schedule']):
+                return {
+                    'text': "",
+                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'week'}}]
+                }
+            
+            # Monthly events
+            if any(phrase in message_lower for phrase in ['this month', 'monthly', 'month schedule']):
+                return {
+                    'text': "",
+                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'month'}}]
+                }
+            
+            # Create event patterns
+            if re.search(r'(schedule|create|add|book|set up).*(meeting|event|appointment|call)', message_lower):
+                event_info = self._extract_event_info(message_lower)
+                return {
+                    'text': "I'll help you schedule that event.",
+                    'actions': [{'service': 'calendar', 'action': 'CREATE_EVENT', 'params': event_info}]
+                }
+            
+            # Find free time
+            if re.search(r'(find|when|available|free).*(time|slot|availability)', message_lower):
+                duration = self._extract_duration(message_lower)
+                return {
+                    'text': f"I'll find available {duration}h slots for you.",
+                    'actions': [{'service': 'calendar', 'action': 'FIND_FREE_TIME', 
+                               'params': {'duration': str(duration)}}]
+                }
         
         # Gmail patterns
         if 'gmail' in services:
@@ -98,36 +230,20 @@ class GeminiProcessor:
                         'actions': [{'service': 'gmail', 'action': 'DELETE_EMAIL', 
                                    'params': {'description': f'from:{match.group(1)}'}}]
                     }
-            
-            if re.search(r'send.*(email|mail).*to\s+([^\s]+)', message_lower):
-                match = re.search(r'to\s+([^\s]+)', message_lower)
-                if match:
-                    return {
-                        'text': "I'll help you compose and send that email.",
-                        'actions': [{'service': 'gmail', 'action': 'SEND_EMAIL',
-                                   'params': {'to': match.group(1)}}]
-                    }
         
-        # Calendar patterns
-        if 'calendar' in services:
-            if re.search(r'(schedule|create|add).*(meeting|event|appointment)', message_lower):
+        # Tasks patterns
+        if 'tasks' in services:
+            if re.search(r'(add|create|new).*(task|todo|reminder)', message_lower):
+                title = self._extract_task_title(message_lower)
                 return {
-                    'text': "I'll help you schedule that event.",
-                    'actions': [{'service': 'calendar', 'action': 'CREATE_EVENT', 'params': {}}]
-                }
-            
-            if re.search(r'(what|show|list).*(calendar|schedule|event).*(today|tomorrow)', message_lower):
-                range_val = 'today' if 'today' in message_lower else 'tomorrow'
-                return {
-                    'text': f"Let me show you your {range_val}'s schedule.",
-                    'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 
-                               'params': {'range': range_val}}]
+                    'text': "I'll add that task for you.",
+                    'actions': [{'service': 'tasks', 'action': 'ADD_TASK', 'params': {'title': title}}]
                 }
         
         return None
     
     def _build_enhanced_prompt(self, user_message: str, context: str, services: Dict) -> str:
-        """Build enhanced prompt for Gemini"""
+        """Build comprehensive prompt with full calendar capabilities"""
         current_date = datetime.now(self.timezone).strftime('%A, %B %d, %Y')
         current_time = datetime.now(self.timezone).strftime('%I:%M %p %Z')
         
@@ -138,99 +254,55 @@ Today is {current_date} at {current_time}.
 
 Available services with FULL access: {service_list}
 
-CRITICAL: You have ACTUAL access to:
-✅ Read, send, delete, manage emails (Gmail)
-✅ Create, update, delete calendar events (Calendar)
-✅ Search, create, share files (Drive)
-✅ Add, update, find contacts (Contacts)
-✅ Create, complete, manage tasks (Tasks)
+CRITICAL RULES:
+1. ALWAYS generate a SERVICE_ACTION when user asks about calendar/schedule/events
+2. For questions like "what is for today", "what's on my calendar", "?" - IMMEDIATELY generate VIEW_EVENTS action
+3. NEVER just acknowledge without action - ALWAYS execute immediately
+4. Do NOT wait for confirmation - execute immediately
+5. Your response should be brief - let the action provide the details
 
 {context}
 
 User says: "{user_message}"
 
-RESPONSE RULES:
-1. Be helpful, friendly, and conversational
-2. USE the actual service actions - you have real access
-3. For ambiguous requests, make intelligent assumptions
-4. Handle typos and variations gracefully
-5. Chain multiple actions if needed
-
 ACTION FORMAT (use EXACT format):
 [SERVICE_ACTION: SERVICE_NAME | action: ACTION_TYPE | param1: "value1" | param2: "value2"]
 
-SERVICE ACTIONS:
+CALENDAR SERVICE ACTIONS:
 
-Gmail:
-[SERVICE_ACTION: GMAIL | action: LIST_UNREAD | max_results: "10"]
-[SERVICE_ACTION: GMAIL | action: SEARCH_EMAILS | query: "search terms" | max_results: "10"]
-[SERVICE_ACTION: GMAIL | action: DELETE_EMAIL | description: "from:sender or subject:topic"]
-[SERVICE_ACTION: GMAIL | action: SEND_EMAIL | to: "email@example.com" | subject: "Subject" | body: "Message"]
-[SERVICE_ACTION: GMAIL | action: READ_EMAIL | email_id: "id"]
-[SERVICE_ACTION: GMAIL | action: REPLY_EMAIL | to: "email" | body: "reply text"]
-[SERVICE_ACTION: GMAIL | action: MARK_READ | email_id: "id"]
-[SERVICE_ACTION: GMAIL | action: ARCHIVE_EMAIL | email_id: "id"]
-[SERVICE_ACTION: GMAIL | action: STAR_EMAIL | email_id: "id"]
+Viewing Events (USE IMMEDIATELY for any calendar query):
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "today"]
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "tomorrow"]
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "week"]
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "month"]
 
-Calendar:
-[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "today/tomorrow/week/month"]
-[SERVICE_ACTION: CALENDAR | action: CREATE_EVENT | title: "Event" | date: "tomorrow" | time: "2pm" | duration: "1 hour"]
-[SERVICE_ACTION: CALENDAR | action: DELETE_EVENT | description: "event name"]
-[SERVICE_ACTION: CALENDAR | action: UPDATE_EVENT | old_description: "current" | new_date: "date" | new_time: "time"]
-[SERVICE_ACTION: CALENDAR | action: SEARCH_EVENTS | query: "search term"]
-[SERVICE_ACTION: CALENDAR | action: CHECK_AVAILABILITY | date: "date"]
+Creating Events:
+[SERVICE_ACTION: CALENDAR | action: CREATE_EVENT | title: "Meeting" | date: "tomorrow" | time: "2pm" | duration: "1 hour"]
 
-Drive:
-[SERVICE_ACTION: DRIVE | action: SEARCH_FILES | query: "filename" | file_type: "document/spreadsheet/presentation"]
-[SERVICE_ACTION: DRIVE | action: CREATE_FOLDER | name: "Folder Name"]
-[SERVICE_ACTION: DRIVE | action: LIST_RECENT | max_results: "10"]
-[SERVICE_ACTION: DRIVE | action: DELETE_FILE | name: "filename"]
-[SERVICE_ACTION: DRIVE | action: SHARE_FILE | name: "filename" | email: "user@example.com" | role: "reader/writer"]
-[SERVICE_ACTION: DRIVE | action: DOWNLOAD_FILE | file_id: "id"]
+Other Calendar Actions:
+[SERVICE_ACTION: CALENDAR | action: DELETE_EVENT | title: "meeting name"]
+[SERVICE_ACTION: CALENDAR | action: UPDATE_EVENT | title: "meeting" | new_time: "3pm"]
+[SERVICE_ACTION: CALENDAR | action: FIND_FREE_TIME | duration: "2"]
 
-Contacts:
-[SERVICE_ACTION: CONTACTS | action: FIND_CONTACT | name: "John Doe"]
-[SERVICE_ACTION: CONTACTS | action: ADD_CONTACT | name: "Name" | email: "email" | phone: "phone"]
-[SERVICE_ACTION: CONTACTS | action: UPDATE_CONTACT | name: "Name" | new_email: "email"]
-[SERVICE_ACTION: CONTACTS | action: DELETE_CONTACT | name: "Name"]
-[SERVICE_ACTION: CONTACTS | action: LIST_CONTACTS | max_results: "20"]
+CRITICAL EXAMPLES:
 
-Tasks:
-[SERVICE_ACTION: TASKS | action: ADD_TASK | title: "Task" | due_date: "tomorrow"]
-[SERVICE_ACTION: TASKS | action: LIST_TASKS | show_completed: "false"]
-[SERVICE_ACTION: TASKS | action: COMPLETE_TASK | title: "task name"]
-[SERVICE_ACTION: TASKS | action: DELETE_TASK | title: "task name"]
-
-SMART EXAMPLES:
-
-User: "Delete all spam"
-Response: I'll help you find and delete spam emails.
-[SERVICE_ACTION: GMAIL | action: DELETE_EMAIL | description: "is:spam"]
-
-User: "What's my day look like?"
-Response: Let me show you today's schedule.
+User: "what is for today"
+Response: 
 [SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "today"]
 
-User: "Email John about the meeting"
-Response: I'll help you send an email to John about the meeting.
-[SERVICE_ACTION: GMAIL | action: SEND_EMAIL | to: "john@example.com" | subject: "Meeting" | body: "Hi John,\n\nRegarding our meeting..."]
+User: "?"
+Response:
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "today"]
 
-User: "Find the budget spreadsheet"
-Response: I'll search for the budget spreadsheet in your Drive.
-[SERVICE_ACTION: DRIVE | action: SEARCH_FILES | query: "budget" | file_type: "spreadsheet"]
+User: "what's on my calendar"
+Response:
+[SERVICE_ACTION: CALENDAR | action: VIEW_EVENTS | range: "today"]
 
-User: "Remind me to call mom tomorrow"
-Response: I'll add that task for tomorrow.
-[SERVICE_ACTION: TASKS | action: ADD_TASK | title: "Call mom" | due_date: "tomorrow"]
+User: "schedule meeting tomorrow 2pm"
+Response: I'll schedule that meeting for you.
+[SERVICE_ACTION: CALENDAR | action: CREATE_EVENT | title: "Meeting" | date: "tomorrow" | time: "2pm" | duration: "1 hour"]
 
-INTELLIGENT INTERPRETATION:
-- "check mail" → LIST_UNREAD emails
-- "free tomorrow?" → CHECK_AVAILABILITY for tomorrow
-- "John's number" → FIND_CONTACT John
-- "clean inbox" → DELETE_EMAIL old or spam
-- "busy today" → VIEW_EVENTS today
-
-Respond naturally and execute the appropriate action(s):"""
+Respond with the appropriate action:"""
         
         return prompt
     
@@ -289,41 +361,24 @@ Respond naturally and execute the appropriate action(s):"""
         message_lower = user_message.lower()
         
         for action in actions:
-            # Enhance Gmail actions
-            if action['service'] == 'gmail':
-                if action['action'] == 'DELETE_EMAIL':
-                    # Add more specific query if available
-                    if 'old' in message_lower:
-                        action['params']['description'] = 'older_than:30d'
-                    elif 'spam' in message_lower:
-                        action['params']['description'] = 'is:spam'
-                    elif 'promotional' in message_lower or 'promotion' in message_lower:
-                        action['params']['description'] = 'category:promotions'
-                    elif 'unread' in message_lower:
-                        action['params']['description'] = 'is:unread'
-                
-                elif action['action'] == 'SEND_EMAIL':
-                    # Extract subject from context if not provided
-                    if not action['params'].get('subject'):
-                        if 'meeting' in message_lower:
-                            action['params']['subject'] = 'Meeting Follow-up'
-                        elif 'report' in message_lower:
-                            action['params']['subject'] = 'Report'
-                        elif 'question' in message_lower:
-                            action['params']['subject'] = 'Question'
-            
             # Enhance Calendar actions
-            elif action['service'] == 'calendar':
-                if action['action'] == 'CREATE_EVENT':
-                    # Add smart defaults
+            if action['service'] == 'calendar':
+                # Add smart defaults for event creation
+                if action['action'] in ['CREATE_EVENT', 'CREATE_RECURRING', 'BLOCK_TIME']:
                     if not action['params'].get('duration'):
-                        if 'meeting' in message_lower:
-                            action['params']['duration'] = '1 hour'
-                        elif 'call' in message_lower:
+                        # Smart duration defaults
+                        if any(word in message_lower for word in ['standup', 'daily', 'sync']):
                             action['params']['duration'] = '30 minutes'
                         elif 'lunch' in message_lower:
                             action['params']['duration'] = '1 hour'
+                        elif 'interview' in message_lower:
+                            action['params']['duration'] = '1 hour'
+                        elif 'call' in message_lower:
+                            action['params']['duration'] = '30 minutes'
+                        else:
+                            action['params']['duration'] = '1 hour'
                     
+                    # Smart title defaults
                     if not action['params'].get('title'):
                         if 'meeting' in message_lower:
                             action['params']['title'] = 'Meeting'
@@ -331,26 +386,128 @@ Respond naturally and execute the appropriate action(s):"""
                             action['params']['title'] = 'Appointment'
                         elif 'call' in message_lower:
                             action['params']['title'] = 'Call'
-            
-            # Enhance Drive actions
-            elif action['service'] == 'drive':
-                if action['action'] == 'SEARCH_FILES':
-                    # Detect file type from message
-                    if not action['params'].get('file_type'):
-                        if any(word in message_lower for word in ['doc', 'document', 'letter']):
-                            action['params']['file_type'] = 'document'
-                        elif any(word in message_lower for word in ['sheet', 'spreadsheet', 'excel', 'csv']):
-                            action['params']['file_type'] = 'spreadsheet'
-                        elif any(word in message_lower for word in ['presentation', 'slides', 'powerpoint']):
-                            action['params']['file_type'] = 'presentation'
-                        elif any(word in message_lower for word in ['pdf']):
-                            action['params']['file_type'] = 'pdf'
+                        elif 'interview' in message_lower:
+                            action['params']['title'] = 'Interview'
         
         return actions
+    
+    # ========================================================================
+    # EXTRACTION HELPER METHODS
+    # ========================================================================
+    
+    def _extract_event_info(self, message: str) -> Dict:
+        """Extract event information from message"""
+        params = {}
+        
+        # Extract title
+        title_patterns = [
+            r'(?:meeting|event|appointment|call) (?:with|about|for) ([^,\.\n]+)',
+            r'(?:schedule|create|book) (?:a |an )?([^,\.\n]+?)(?:\s+(?:on|at|for))',
+            r'"([^"]+)"',
+            r'\'([^\']+)\''
+        ]
+        
+        for pattern in title_patterns:
+            match = re.search(pattern, message, re.IGNORECASE)
+            if match:
+                params['title'] = match.group(1).strip()
+                break
+        
+        # Extract date
+        date_patterns = [
+            r'(?:on |for )?(tomorrow|today|monday|tuesday|wednesday|thursday|friday|saturday|sunday)',
+            r'(?:on |for )?next (week|month|monday|tuesday|wednesday|thursday|friday)',
+            r'(?:on |for )?(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)',
+            r'(?:on |for )?(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}'
+        ]
+        
+        for pattern in date_patterns:
+            match = re.search(pattern, message, re.IGNORECASE)
+            if match:
+                params['date'] = match.group(1) if match.group(1) else match.group(0)
+                break
+        
+        # Extract time
+        time_patterns = [
+            r'at (\d{1,2}(?::\d{2})?\s*(?:am|pm))',
+            r'at (\d{1,2}(?::\d{2})?)',
+            r'(\d{1,2}(?::\d{2})?\s*(?:am|pm))',
+            r'(morning|afternoon|evening|noon|midnight)'
+        ]
+        
+        for pattern in time_patterns:
+            match = re.search(pattern, message, re.IGNORECASE)
+            if match:
+                params['time'] = match.group(1)
+                break
+        
+        # Extract duration
+        duration = self._extract_duration(message)
+        if duration:
+            params['duration'] = f"{duration} {'hour' if duration == 1 else 'hours'}"
+        
+        return params
+    
+    def _extract_event_reference(self, message: str) -> Dict:
+        """Extract reference to an existing event"""
+        params = {}
+        
+        # Look for event title or description
+        patterns = [
+            r'(?:the |my )?"([^"]+)"',
+            r'(?:the |my )?\'([^\']+)\'',
+            r'(?:the |my )?([\w\s]+ (?:meeting|appointment|event|call))',
+            r'with ([\w\s]+)',
+            r'about ([\w\s]+)'
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, message, re.IGNORECASE)
+            if match:
+                params['title'] = match.group(1).strip()
+                break
+        
+        return params
+    
+    def _extract_duration(self, message: str) -> float:
+        """Extract duration in hours"""
+        patterns = [
+            (r'(\d+\.?\d*)\s*hours?', 1),
+            (r'(\d+\.?\d*)\s*hrs?', 1),
+            (r'(\d+)\s*minutes?', 1/60),
+            (r'(\d+)\s*mins?', 1/60),
+            (r'half\s*(?:an\s*)?hour', 0.5),
+            (r'(\d+)\s*days?', 24),
+            (r'all\s*day', 24)
+        ]
+        
+        for pattern, multiplier in patterns:
+            if isinstance(multiplier, (int, float)):
+                match = re.search(pattern, message, re.IGNORECASE)
+                if match:
+                    if pattern in [r'half\s*(?:an\s*)?hour', r'all\s*day']:
+                        return multiplier
+                    value = float(match.group(1))
+                    return value * multiplier
+        
+        return 1.0  # Default 1 hour
+    
+    def _extract_task_title(self, message: str) -> str:
+        """Extract task title from message"""
+        # Remove command words
+        clean = re.sub(r'(add|create|new|task|todo|reminder)', '', message, flags=re.IGNORECASE)
+        return clean.strip()[:100]  # Limit length
     
     def _fallback_processing(self, user_message: str, available_services: Dict) -> Dict:
         """Fallback processing when Gemini fails"""
         message_lower = user_message.lower()
+        
+        # Most common case - user wants to see calendar
+        if any(word in message_lower for word in ['calendar', 'schedule', 'today', 'events', 'what']):
+            return {
+                'text': "",
+                'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'today'}}]
+            }
         
         # Try to understand intent from keywords
         intents = self._detect_intents(message_lower)
@@ -358,40 +515,22 @@ Respond naturally and execute the appropriate action(s):"""
         if not intents:
             return {
                 'text': "I understand you need help, but I'm not sure what you're asking for. Could you please be more specific? For example:\n"
-                        "• 'Show my unread emails'\n"
-                        "• 'Schedule a meeting tomorrow'\n"
-                        "• 'Search for budget file'",
+                        "• 'Show my calendar'\n"
+                        "• 'Schedule a meeting tomorrow at 2pm'\n"
+                        "• 'Check my emails'",
                 'actions': []
             }
         
         # Build response based on detected intents
         primary_intent = intents[0]
         
-        if primary_intent['service'] == 'gmail':
-            if primary_intent['action'] == 'list':
-                return {
-                    'text': "I'll check your emails for you.",
-                    'actions': [{'service': 'gmail', 'action': 'LIST_UNREAD', 'params': {'max_results': '10'}}]
-                }
-            elif primary_intent['action'] == 'delete':
-                return {
-                    'text': "I'll help you delete emails. Let me search for them first.",
-                    'actions': [{'service': 'gmail', 'action': 'DELETE_EMAIL', 'params': {'description': 'is:unread'}}]
-                }
-        
-        elif primary_intent['service'] == 'calendar':
+        if primary_intent['service'] == 'calendar':
             if primary_intent['action'] == 'view':
                 return {
-                    'text': "Let me show you your calendar.",
+                    'text': "",
                     'actions': [{'service': 'calendar', 'action': 'VIEW_EVENTS', 'params': {'range': 'today'}}]
                 }
-            elif primary_intent['action'] == 'create':
-                return {
-                    'text': "I'll help you create an event. Please provide more details.",
-                    'actions': []
-                }
         
-        # Default response
         return {
             'text': f"I think you want to {primary_intent['action']} something in {primary_intent['service']}. "
                    f"Let me help you with that.",
@@ -402,59 +541,19 @@ Respond naturally and execute the appropriate action(s):"""
         """Detect intents from message"""
         intents = []
         
-        # Gmail intents
-        if any(word in message for word in ['email', 'mail', 'inbox', 'gmail', 'message']):
-            if any(word in message for word in ['delete', 'remove', 'trash', 'clean']):
-                intents.append({'service': 'gmail', 'action': 'delete'})
-            elif any(word in message for word in ['send', 'write', 'compose', 'reply']):
-                intents.append({'service': 'gmail', 'action': 'send'})
-            elif any(word in message for word in ['read', 'show', 'check', 'view', 'list', 'see']):
-                intents.append({'service': 'gmail', 'action': 'list'})
-            elif any(word in message for word in ['search', 'find', 'look']):
-                intents.append({'service': 'gmail', 'action': 'search'})
-        
         # Calendar intents
-        if any(word in message for word in ['calendar', 'schedule', 'event', 'meeting', 'appointment']):
-            if any(word in message for word in ['create', 'add', 'schedule', 'book', 'set']):
+        calendar_keywords = ['calendar', 'schedule', 'event', 'meeting', 'appointment', 'today', 'tomorrow']
+        if any(word in message for word in calendar_keywords):
+            if any(word in message for word in ['show', 'view', 'check', 'what', 'list', '?']):
+                intents.append({'service': 'calendar', 'action': 'view'})
+            elif any(word in message for word in ['create', 'add', 'schedule', 'book', 'set']):
                 intents.append({'service': 'calendar', 'action': 'create'})
             elif any(word in message for word in ['delete', 'cancel', 'remove']):
                 intents.append({'service': 'calendar', 'action': 'delete'})
-            elif any(word in message for word in ['show', 'view', 'check', 'what', 'list']):
-                intents.append({'service': 'calendar', 'action': 'view'})
-            elif any(word in message for word in ['update', 'change', 'modify', 'reschedule']):
-                intents.append({'service': 'calendar', 'action': 'update'})
         
-        # Drive intents
-        if any(word in message for word in ['file', 'document', 'folder', 'drive', 'sheet', 'spreadsheet']):
-            if any(word in message for word in ['search', 'find', 'look', 'where']):
-                intents.append({'service': 'drive', 'action': 'search'})
-            elif any(word in message for word in ['create', 'make', 'new']):
-                intents.append({'service': 'drive', 'action': 'create'})
-            elif any(word in message for word in ['delete', 'remove', 'trash']):
-                intents.append({'service': 'drive', 'action': 'delete'})
-            elif any(word in message for word in ['share', 'send', 'collaborate']):
-                intents.append({'service': 'drive', 'action': 'share'})
-        
-        # Contacts intents
-        if any(word in message for word in ['contact', 'phone', 'number', 'address', 'person']):
-            if any(word in message for word in ['find', 'search', 'look', 'get']):
-                intents.append({'service': 'contacts', 'action': 'find'})
-            elif any(word in message for word in ['add', 'create', 'new', 'save']):
-                intents.append({'service': 'contacts', 'action': 'add'})
-            elif any(word in message for word in ['delete', 'remove']):
-                intents.append({'service': 'contacts', 'action': 'delete'})
-            elif any(word in message for word in ['update', 'change', 'edit']):
-                intents.append({'service': 'contacts', 'action': 'update'})
-        
-        # Tasks intents
-        if any(word in message for word in ['task', 'todo', 'reminder', 'to-do', 'remind']):
-            if any(word in message for word in ['add', 'create', 'new', 'set']):
-                intents.append({'service': 'tasks', 'action': 'add'})
-            elif any(word in message for word in ['complete', 'done', 'finish', 'check']):
-                intents.append({'service': 'tasks', 'action': 'complete'})
-            elif any(word in message for word in ['delete', 'remove']):
-                intents.append({'service': 'tasks', 'action': 'delete'})
-            elif any(word in message for word in ['show', 'list', 'view', 'what']):
-                intents.append({'service': 'tasks', 'action': 'list'})
+        # Gmail intents
+        if any(word in message for word in ['email', 'mail', 'inbox', 'gmail']):
+            if any(word in message for word in ['read', 'show', 'check', 'view', 'list']):
+                intents.append({'service': 'gmail', 'action': 'list'})
         
         return intents
